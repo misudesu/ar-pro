@@ -1,38 +1,57 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* .heding{
+  
+font-size: 96px;
+text-align: center;
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.heding1{
   color: white;
+  line-height: 100px;
+} */
+.G-title{
+ 
+background: linear-gradient(90.74deg, #58EAB5 10.28%, rgba(251, 241, 14, 0.78) 71.09%, rgba(251, 241, 14, 0.78) 76.75%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+text-fill-color: transparent;
 }
-
-.App-link {
-  color: #61dafb;
+.Scard{
+  background: linear-gradient(90.94deg, #87DEBF 8.44%, rgba(217, 217, 217, 0) 152.07%);
+border-radius: 8px;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.S-title{
+  background: linear-gradient(190.14deg, #FFFFFF 7.58%, rgba(255, 255, 255, 0) 122.32%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+text-fill-color: transparent;
+}
+.BG-card{
+background: linear-gradient(99.94deg, #56A3C4 45.98%, rgba(217, 217, 217, 0) 106.72%);
+}
+.moto{
+  line-height: 134%;
+  background: linear-gradient(180deg, #E0E0E0 0%, rgba(224, 224, 224, 0) 181.25%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+text-fill-color: transparent;
+}
+.font-poet{
+  font-family: 'poetsenone-regular', sans-serif;
+}
+.font-Pop{
+  font-family: 'Poppins', sans-serif;
+}
+.heding2{
+ 
+  background: linear-gradient(90.8deg, #BDF743 38.55%, rgba(53, 218, 139, 0) 99.72%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
 }
