@@ -41,6 +41,11 @@ background: linear-gradient(99.94deg, #56A3C4 45.98%, rgba(217, 217, 217, 0) 106
 background-clip: text;
 text-fill-color: transparent;
 }
+.club-card{
+  box-sizing: border-box;
+  border: 1px solid #FFFFFF;
+border-radius: 10px;
+}
 .font-poet{
   font-family: 'poetsenone-regular', sans-serif;
 }
@@ -54,4 +59,24 @@ text-fill-color: transparent;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   text-fill-color: transparent;
+}
+.faq{
+  width: 241px;
+height: 268px;
+left: 600px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 200px;
+line-height: 134%;
+/* identical to box height, or 268px */
+
+text-align: center;
+
+background: linear-gradient(289.56deg, #85E30D 33.71%, #E10808 82.3%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+text-fill-color: transparent;
 }

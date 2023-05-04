@@ -3,11 +3,14 @@ import Card from '../component/Card'
 import data from '../Data/Data'
 import Service from '../component/Service'
 import Gread from '../component/Gread'
+import Club from '../component/Club'
+import FAQ from '../component/FAQ'
+import Footer from '../component/Footer'
 
 function Landing() {
-console.log(data)
+
   return (
-    <div className='mt-0 mb-0'>
+    <div className='mt-0'>
       <div>
         <p className=' heding heding1 text-[96px] looding-[129px] text-center font-Poppins'>
          <span className='mt-[90px] text-white inline-block mt-[214px]'>
@@ -45,6 +48,17 @@ Infinite Possibilities.
      <div className='mt-[68px]'>
       <Gread/>
      </div>
+     <div className='mt-[68px]'>
+      <Club/>
+      
+     </div>
+     <div className='mt-[68px]'>
+      <FAQ/>
+      
+     </div>
+     <div className='mt-[68px]'>
+      <Footer/>
+      </div>
     </div>
   )
 }
