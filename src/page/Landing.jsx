@@ -6,11 +6,16 @@ import Gread from '../component/Gread'
 import Club from '../component/Club'
 import FAQ from '../component/FAQ'
 import Footer from '../component/Footer'
+import { useParams } from 'react-router-dom'
+import { useAuth } from './AppProvider'
 
 function Landing() {
-
+  const {id} =useParams()
+ // const haveL=useAuth();
+  //haveL.haveLanding(id)
+  console.log(id)
   return (
-    <div className='mt-0'>
+    <div className='mt-0 bg-black'>
       <div>
         <p className=' heding heding1 text-[96px] looding-[129px] text-center font-Poppins'>
          <span className='mt-[90px] text-white inline-block mt-[214px]'>
