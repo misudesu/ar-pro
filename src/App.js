@@ -37,7 +37,7 @@ function App() {
     <Routes>
       <Route path="/root" element={<Login/>} />
       <Route path="/landing/:id" element={<Landing />} />
-  <Route  path='/' element={<Root/>} />
+  <Route  path='/' element={<Home/>} />
   <Route path='/AR' element={<AR/>} />
   <Route path='/faq' element={<FAQs/>} />
   <Route path='/onClub' element={<Clubs/>} />
