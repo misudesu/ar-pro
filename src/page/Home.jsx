@@ -61,7 +61,7 @@ function Home() {
  
 }, []);
 useEffect(() => {
-    const unsubscribe1 = onSnapshot(department, (snapshot) => {
+    const unsubscribe2 = onSnapshot(faq, (snapshot) => {
       const frame = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
@@ -74,24 +74,24 @@ useEffect(() => {
 
     // Cleanup function
     return () => {
-      unsubscribe1();
+      unsubscribe2();
     };
  
 }, []);
 useEffect(() => {
-    const unsubscribe1 = onSnapshot(department, (snapshot) => {
+    const unsubscribe3 = onSnapshot(club, (snapshot) => {
       const frame = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-      const tabel=frame.map(({id,title,image,subTitle,frontVideo,backVideo,PDF})=>({id,title,subTitle,image,frontVideo,backVideo,PDF}))
-      setClub(tabel);
+      
+      setClub(frame);
     }, (error) => {
       console.error("Error getting documents:", error);
     });
     // Cleanup function
     return () => {
-      unsubscribe1();
+      unsubscribe3();
     };
  
 }, []);

@@ -58,7 +58,7 @@ function App() {
  
   <Route path='/AR' element={<AR/>} />
   <Route path='/faq' element={<FAQs FAQs='FAQs'  pageTitle="ALL FAQ's"/>} />
-  <Route path='/onClub' element={<Clubs Department='Culb' pageTitle='ALL Club'/>} />
+  <Route path='/onClub' element={<Clubs Department='Club' pageTitle='ALL Club'/>} />
   <Route path='/department' element={<Department Department='Department' pageTitle='ALL Department' />}/>
 
   <Route path='/' element={<Home />} />
