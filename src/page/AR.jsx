@@ -218,14 +218,16 @@ const Delete=(id,FrameImage,video,video1,pdf)=>{
 }
   return (
     <div>
-      <div className='flex  items-center   mx-8'>
+      <div className='flex  items-center  justify-end my-8  mx-8'>
         <p onClick={()=>Switch()} className={`px-5 py-2 border-b-2 w-32 text-center  ${chnage!=false?'border-blue-500' :''}`}>AR</p>
         <p onClick={()=>Switch()} className={`py-2 px-5 border-b-2 w-32 text-center  ${chnage!=true?'border-blue-500' :''}`}>ADD +</p>
       </div>
       {contextHolder}
       {chnage!=false?
-  
+  <div className='m-5'>
+
  <Table Delete={Delete} table={DB}/>
+ </div>
     :
     
       <div className='flex'>

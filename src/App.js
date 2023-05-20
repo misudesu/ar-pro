@@ -13,14 +13,31 @@ import Clubs from './page/Clubs';
 import FAQs from './page/FAQs';
 import { useState } from 'react';
 import Signup from './page/Signup';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from './Server/Config';
 
 function App() {
  const {id} =useParams()
  console.log(id)
  const [nav, setNav]=useState(0);
+ const [showNav, setShowNav] = useState(true);
+ const [user] = useAuthState(auth);
   return (
     <BrowserRouter>
-    
+      {!user ? (
+<>
+
+{   showNav &&
+
+<Routes>
+  <Route>
+  <Route path="/" element={<Login/>} />
+ <Route path='/signup' element={<Signup/>}/>
+  </Route>
+</Routes>
+}
+</>
+):(
      <div className='flex w-full'>
       {/* {id!='/landing'?
        */}
@@ -36,19 +53,20 @@ function App() {
     
             <div className='text-black'>
     <Routes>
-      <Route path="/" element={<Login/>} />
+     
       <Route path="/landing/:id" element={<Landing />} />
-  <Route path='/signup' element={<Signup/>}/>
+ 
   <Route path='/AR' element={<AR/>} />
   <Route path='/faq' element={<FAQs FAQs='FAQs'  pageTitle="ALL FAQ's"/>} />
   <Route path='/onClub' element={<Clubs Department='Culb' pageTitle='ALL Club'/>} />
   <Route path='/department' element={<Department Department='Department' pageTitle='ALL Department' />}/>
 
-  <Route path='/Home' element={<Home />} />
+  <Route path='/' element={<Home />} />
     </Routes>
     </div>
             </div>
            </div>
+)}
   </BrowserRouter>
   );
 }

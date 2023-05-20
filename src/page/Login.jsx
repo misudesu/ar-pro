@@ -28,7 +28,7 @@ setForm({...form,[e.target.name]:e.target.value});
     if(form.Email!=null&&form.Email!=''&&form.Password!=null&&form.Password!=''){
       try {     
         await signInWithEmailAndPassword(auth, form.Email, form.Password);    
-        navigate("/Home");
+        navigate("/");
         
       } catch (error) {  
         notif('error',error.message)
@@ -52,13 +52,13 @@ setForm({...form,[e.target.name]:e.target.value});
   return (
     <div className='h-screen'>
       {contextHolder}
-      <div className='flex justify-center items-center gap-4 max-h-screen'>
+      <div className='flex  items-center gap-32 max-h-screen'>
         {/* left image  */}
         <div>
-<img width={100} height={100} className=' w-[100%] h-[100%]' src={limg}/>
+<img  className=' h-screen w-full' src={limg}/>
         </div>
         {/* login form */}
-        <div className='flex justify-center items-center '>
+        <div className='flex justify-center items-center  '>
          
 <div className='flex flex-col gap-4' >
     <Input styleLable='text-sm mb-[-5px] ' type='email' name='Email' lable="Email" handleChange={handlChange} style='h-[40px] w-[500px] rounded-md border border-blure-500 ' />
