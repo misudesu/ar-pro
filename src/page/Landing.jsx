@@ -9,11 +9,10 @@ import Footer from '../component/Footer'
 import { useParams } from 'react-router-dom'
 import { useAuth } from './AppProvider'
 
-function Landing() {
+function Landing(props) {
   const {id} =useParams()
- // const haveL=useAuth();
-  //haveL.haveLanding(id)
-  console.log(id)
+ 
+ 
   return (
     <div className='mt-0 bg-black'>
       <div>
@@ -33,9 +32,9 @@ welcome to our campus and we are here to help you
         </p>
       </div>
       <div className=' p-10 overflow-hidden flex gap-10 mt-[145px]'>
-      {data.news.map((datas,index)=>(
-<div key={index} >
-<Card title={datas.title} img={datas.img} desc={datas.desc} />
+      {props.depar?.map((datas,index)=>(
+<div key={index}>
+<Card    title={datas.title} img={datas.image} desc={datas.Discription} />
   </div>
       ))}
 
@@ -54,11 +53,11 @@ Infinite Possibilities.
       <Gread/>
      </div>
      <div className='mt-[68px]'>
-      <Club/>
+      <Club Clubs={props.Club}/>
       
      </div>
      <div className='mt-[68px]'>
-      <FAQ/>
+      <FAQ Faq={props.Faq}/>
       
      </div>
      <div className='mt-[68px]'>
