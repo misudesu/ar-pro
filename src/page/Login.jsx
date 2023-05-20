@@ -2,20 +2,56 @@ import React, { useState } from 'react'
 import Input from '../component/Input'
 import Button from '../component/Button';
 import limg from '../Asset/limg.png'
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { createUserWithEmailAndPassword, updateProfile, deleteUser,reauthenticateWithCredential, sendPasswordResetEmail, signInWithEmailAndPassword} from "firebase/auth";
+import { storage, db, auth } from "../Server/Config";
+import {  message, Space } from 'antd';
 function Login() {
+  let navigate = useNavigate();
     const [form,setForm]=useState({
-        email:'',
-        password:'',
+      Email:null,
+        Password:null,
     })
+    const [messageApi, contextHolder] = message.useMessage();
+    const notif = (type,message) => {
+      messageApi.open({
+        type: type,
+        content: message,
+        
+      });
+    };
     function handlChange(e){
       e.preventDefault();
 setForm({...form,[e.target.name]:e.target.value});
     }
-    function login(){
+  async  function  login(){
+    if(form.Email!=null&&form.Email!=''&&form.Password!=null&&form.Password!=''){
+      try {     
+        await signInWithEmailAndPassword(auth, form.Email, form.Password);    
+        navigate("/Home");
+        
+      } catch (error) {  
+        notif('error',error.message)
+      }
 
+    }else{
+      notif('warning','All field requerd!');
+    }
+    }
+    const ResetPassword=async()=>{
+      await sendPasswordResetEmail(auth, form.Email)
+    .then(() => {
+      notif('success',"Password reset email sent!");
+    })
+    .catch((error) => {
+    
+      // ..
+      notif('error',error.message)
+    });
     }
   return (
     <div className='h-screen'>
+      {contextHolder}
       <div className='flex justify-center items-center gap-4 max-h-screen'>
         {/* left image  */}
         <div>
@@ -23,12 +59,19 @@ setForm({...form,[e.target.name]:e.target.value});
         </div>
         {/* login form */}
         <div className='flex justify-center items-center '>
-<form>
-    <Input styleLable='text-sm mb-[-5px] ' type='email' name='email' lable="Email" handlChage={handlChange} style='h-[40px] w-[500px] rounded-md border border-blure-500 ' />
-    <Input styleLable='text-sm mb-[-5px]' name='password' placeholder='Password' type='password' style='h-[40px] w-[500px] rounded-md border border-blure-500 '  lable="Password" handlChage={handlChange} />
+         
+<div className='flex flex-col gap-4' >
+    <Input styleLable='text-sm mb-[-5px] ' type='email' name='Email' lable="Email" handleChange={handlChange} style='h-[40px] w-[500px] rounded-md border border-blure-500 ' />
+    <Input styleLable='text-sm mb-[-5px]' name='Password' placeholder='Password' type='password' style='h-[40px] w-[500px] rounded-md border border-blure-500 '  lable="Password" handleChange={handlChange} />
 <Button type='submite' style='h-[40px] w-[500px] bg-blue-500 mt-4' onClick={login} >Sign in</Button>
-<p className='text-center mt-5'>forget Password</p>
-</form>
+<div className='flex justify-center gap-8'>
+
+<p className='text-center mt-5' onClick={ResetPassword} >forget Password</p>
+<Link to='/signup'>
+<p className='text-center mt-5'>Sign Up</p>
+</Link>
+</div>
+</div >
         </div>
         </div>  
     </div>

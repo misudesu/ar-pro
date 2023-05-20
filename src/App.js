@@ -12,6 +12,7 @@ import Department from './page/Department';
 import Clubs from './page/Clubs';
 import FAQs from './page/FAQs';
 import { useState } from 'react';
+import Signup from './page/Signup';
 
 function App() {
  const {id} =useParams()
@@ -35,15 +36,15 @@ function App() {
     
             <div className='text-black'>
     <Routes>
-      <Route path="/root" element={<Login/>} />
+      <Route path="/" element={<Login/>} />
       <Route path="/landing/:id" element={<Landing />} />
-  <Route  path='/' element={<Home/>} />
+  <Route path='/signup' element={<Signup/>}/>
   <Route path='/AR' element={<AR/>} />
-  <Route path='/faq' element={<FAQs/>} />
-  <Route path='/onClub' element={<Clubs/>} />
-  <Route path='/department' element={<Department/>}/>
+  <Route path='/faq' element={<FAQs FAQs='FAQs'  pageTitle="ALL FAQ's"/>} />
+  <Route path='/onClub' element={<Clubs Department='Culb' pageTitle='ALL Club'/>} />
+  <Route path='/department' element={<Department Department='Department' pageTitle='ALL Department' />}/>
 
-  <Route path='/Home' element={<Home/>} />
+  <Route path='/Home' element={<Home />} />
     </Routes>
     </div>
             </div>

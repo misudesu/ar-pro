@@ -9,7 +9,7 @@ function Root() {
     <div>
         <div className='flex w-full'>
         <div className='w-[15%] h-screen bg-black text-white'>
-                <SideNav/>
+             <SideNav/>
             </div>
             <div className='w-[90%] h-[40px] text-white'>
             <TopNav/>
@@ -17,7 +17,6 @@ function Root() {
              <Home/>
             </div>
             </div>
-           
         </div>
     </div>
   )
