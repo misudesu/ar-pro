@@ -4,13 +4,14 @@ import Button from '../component/Button'
 import d1 from '../Asset/d1.png'
 import d2 from '../Asset/d2.png'
 import FORM from '../component/FORM'
+import { useParams } from 'react-router-dom'
+import { useAuth } from '../Fanction/AuthProvider'
 function Clubs(props) {
-    const table=[
-        {id:1,title:'Digital Strategy',dic:'Digital Strategy...',image:d1},
-        {id:2,title:'Digital Strategy',dic:'Digital Strategy...',image:d2},
-        {id:1,title:'Digital Strategy',dic:'Digital Strategy...',image:d1},
-
-    ]
+  const {demo} =useParams()
+ const auths=useAuth();
+ auths.updateDemo(demo)
+ 
+  
   return (
     <div>
        <FORM Department={props.Department} pageTitle={props.pageTitle}/>
