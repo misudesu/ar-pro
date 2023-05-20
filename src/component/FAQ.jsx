@@ -6,7 +6,7 @@ function FAQ(props) {
     
   return (
     <div>
-        <div className=' flex justify-center items-center mt-[280px] '>
+        <div className=' flex justify-center items-center mt-[280px] text-white '>
             <div className='relative  '>
             <p className=' faq '>{props.Faq?.length}</p>
     <div className='absolute top-24 right-0  w-full flex justify-center items-center text-white'>
@@ -24,7 +24,7 @@ function FAQ(props) {
 
 <p className='font-Pop text-[36px]'>{datas.title}</p>
     </div>
-{left===index?<p className='ml-[30px] border p-3 border-t-black border-b-black border-r-black  border-l-red-500 w-[893px]'>{datas.Discrption}</p>:''}
+{left===index?<p className='ml-[30px] border p-3 border-t-black border-b-black border-r-black  border-l-red-500 w-[893px] text-white'>{datas.Discription}</p>:''}
 </div>
 
 </div>

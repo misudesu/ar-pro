@@ -14,7 +14,16 @@ function Club(props) {
     {props.Clubs?.map((datas,index)=>(
  <div className='club-card ' key={index}>
  <p className='text-[32px] font-Pop mt-[62px] mb-[35px]'>{datas.title}</p>
- <p className='text-[16px] font-Pop p-2'>{datas.Discription}</p>
+ <p className='text-[16px] font-Pop p-2'
+ style={{
+  whiteSpace: 'normal',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  display: '-webkit-box',
+  WebkitBoxOrient: 'vertical',
+  WebkitLineClamp: 3,
+}}
+ >{datas.Discription}</p>
 </div>
     ))}
    

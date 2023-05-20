@@ -9,7 +9,13 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import {  message, Space,  } from 'antd';
 import Input from '../component/Input';
 import TextArea from '../component/TextArea';
+import { useParams } from 'react-router-dom';
+import { useAuth } from '../Fanction/AuthProvider';
 function FAQs(props) {
+  const {demo} =useParams()
+ const auths=useAuth();
+ auths.updateDemo(demo)
+ 
   const [left,setLeft]=useState(true);
   const [users] = useAuthState(auth);
   const [chnage,setSwitch]=useState(true);

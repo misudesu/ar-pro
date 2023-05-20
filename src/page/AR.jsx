@@ -10,7 +10,13 @@ import {  message, Space,  } from 'antd';
 import d1 from '../Asset/d1.png'
 import d2 from '../Asset/d2.png'
 import Table from '../component/Table';
+import { useParams } from 'react-router-dom';
+import { useAuth } from '../Fanction/AuthProvider';
 function AR() {
+  const {demo} =useParams()
+ const auths=useAuth();
+ auths.updateDemo(demo)
+ 
   const [users] = useAuthState(auth);
   const [chnage,setSwitch]=useState(true);
   const [DB,setDatabase]=useState(null)

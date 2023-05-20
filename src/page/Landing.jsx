@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Card from '../component/Card'
 import data from '../Data/Data'
 import Service from '../component/Service'
@@ -7,11 +7,13 @@ import Club from '../component/Club'
 import FAQ from '../component/FAQ'
 import Footer from '../component/Footer'
 import { useParams } from 'react-router-dom'
-import { useAuth } from './AppProvider'
+import { useAuth } from '../Fanction/AuthProvider'
 
 function Landing(props) {
-  const {id} =useParams()
- 
+  const {demo} =useParams()
+  const auths=useAuth();
+  auths.updateDemo(demo)
+  
  
   return (
     <div className='mt-0 bg-black'>
@@ -39,7 +41,7 @@ welcome to our campus and we are here to help you
       ))}
 
       </div>
-     <div className='mt-[198px]'>
+     <div className='mt-[138px]'>
       <p className='text-white text-[64px] font-Pop text-center S-title'>One Organization <br/>
 <span className='font-poet'>
 Infinite Possibilities.

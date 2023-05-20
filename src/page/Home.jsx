@@ -3,9 +3,14 @@ import img1 from '../Asset/rafiki.png'
 import AR from '../Asset/cuate.png'
 import total from '../Asset/total.png'
 import group from '../Asset/group.png'
+import { Link, useParams } from 'react-router-dom'
+import { useAuth } from '../Fanction/AuthProvider'
 
 function Home(props) {
- 
+    const {demo} =useParams()
+    const auths=useAuth();
+    auths.updateDemo(demo)
+    
   return (
     <div className='flex flex-col  items-center '>
        <p className='mt-8 ml-8'>Home page</p>
@@ -74,9 +79,9 @@ function Home(props) {
             </div>
         </div>
         <div className='w-full m-16 w-[80%] rounded-md bg-blue-500 h-20 '>
-            <a target="_blank" href={`/landing/amu`}>
+            <Link  target='_blank' to={'/Landing/1'}>
         <p className='mt-8 ml-8 text-white'>View A Page Now</p>
-            </a>
+            </Link>
         </div>
         </div>
   )
