@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import {  message, Space } from 'antd';
 import { createUserWithEmailAndPassword, updateProfile, deleteUser,reauthenticateWithCredential} from "firebase/auth";
 import { storage, db, auth } from "../Server/Config";
+import { addDoc, collection, Timestamp } from 'firebase/firestore';
 function Signup() {
     const [messageApi, contextHolder] = message.useMessage();
     const notif = (type,message) => {
@@ -24,6 +25,7 @@ function Signup() {
       e.preventDefault();
 setFormData({...formData,[e.target.name]:e.target.value});
     }
+    const articleRef = collection(db, 'User');
     function SignUp(){
         console.log(formData)
         if(formData.password===formData.Reptpassword){
@@ -36,7 +38,17 @@ setFormData({...formData,[e.target.name]:e.target.value});
     const handleSignup = async () => {
         try {
             await createUserWithEmailAndPassword(auth, formData.email, formData.password);
-        
+            addDoc(articleRef, {
+              Key:formData.email,
+              stutes:false,
+              role:'Admin',
+               createdAt: Timestamp.now().toDate(),
+          }) 
+          updateProfile(auth.currentUser, { displayName: 'Admin' })  
+
+            .catch((error) => {
+              notif(error,"Error adding article",1);
+            });
          handleSignUp();
         } catch (error) {
             notif( "error",error.code );
@@ -49,10 +61,10 @@ setFormData({...formData,[e.target.name]:e.target.value});
   return (
     <div className='h-screen'>
         {contextHolder}
-      <div className='flex justify-center items-center gap-4 max-h-screen'>
+      <div className='flex  items-center gap-32 max-h-screen'>
         {/* left image  */}
         <div>
-<img width={100} height={100} className=' w-[100%] h-[100%]' src={limg}/>
+<img  className=' h-screen w-full' src={limg}/>
         </div>
         {/* login form */}
         <div className='flex justify-center items-center '>

@@ -15,6 +15,10 @@ function SideNav(props) {
     <div >
        <div className=' '>
       <div className='mt-[268px]'>
+        {props.stutesArray?.length!=0&&props?.stutesArray[0]?.stutes!=true?
+        <p className='text-center'>Contact Admin to get Permition and to see Navigation </p>
+      :
+
 <div className='flex flex-col space-y-5 text-center'>
     {item.map((item,index)=>(
      <Link className={`${item.id==props.navs?'p-4 bg-white text-black':''}`} to={item.link} onClick={()=>props.nav(index)}>
@@ -22,6 +26,7 @@ function SideNav(props) {
      </Link>  
     ))}
 </div>
+      }
       </div>
         </div> 
         </div>

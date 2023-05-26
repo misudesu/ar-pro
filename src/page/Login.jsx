@@ -6,6 +6,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword, updateProfile, deleteUser,reauthenticateWithCredential, sendPasswordResetEmail, signInWithEmailAndPassword} from "firebase/auth";
 import { storage, db, auth } from "../Server/Config";
 import {  message, Space } from 'antd';
+import { useAuth } from '../Fanction/AuthProvider';
 function Login() {
   let navigate = useNavigate();
     const [form,setForm]=useState({
@@ -24,12 +25,17 @@ function Login() {
       e.preventDefault();
 setForm({...form,[e.target.name]:e.target.value});
     }
+    const auths=useAuth();
   async  function  login(){
     if(form.Email!=null&&form.Email!=''&&form.Password!=null&&form.Password!=''){
       try {     
         await signInWithEmailAndPassword(auth, form.Email, form.Password);    
+       
+       
         navigate("/");
-        
+       
+      
+
       } catch (error) {  
         notif('error',error.message)
       }

@@ -5,12 +5,23 @@ import total from '../Asset/total.png'
 import group from '../Asset/group.png'
 import { Link, useParams } from 'react-router-dom'
 import { useAuth } from '../Fanction/AuthProvider'
+import { auth, db } from '../Server/Config'
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
+import Tables from '../component/Tables'
 
 function Home(props) {
     const {demo} =useParams()
-    const auths=useAuth();
+  const auths=useAuth();
     auths.updateDemo(demo)
-    
+   
+   
+    const [Thead,setThead]=useState([
+        {title:'Email'},
+        {title:'Stutes'},
+        {title:'CreatedAt'},
+     
+       ])
+   
   return (
     <div className='flex flex-col  items-center '>
        <p className='mt-8 ml-8'>Home page</p>
@@ -78,10 +89,13 @@ function Home(props) {
                 {/*  */}
             </div>
         </div>
-        <div className='w-full m-16 w-[80%] rounded-md bg-blue-500 h-20 '>
-            <Link  target='_blank' to={'/Landing/1'}>
-        <p className='mt-8 ml-8 text-white'>View A Page Now</p>
-            </Link>
+        <div className='w-full m-16 w-[70%] rounded-md  h-20 mx-16 '>
+          <Tables Thead={Thead}  currentItems={props.database}/>
+          
+            {/* <Link  target='_blank' to={'/Landing/1'}>
+        <p className='mt-8 ml-8 text-white'>View A Page Now </p>
+            </Link> */}
+        
         </div>
         </div>
   )
