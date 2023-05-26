@@ -181,7 +181,7 @@ useEffect(()=>{
 console.log(check)
 if(check!=null){
 
-  if(check[0]?.Key===auth.currentUser){
+  if(check[0]?.Key===auth.currentUser.email){
   auth.currentUser.delete().then(() => {    
       auths.notif('success','user deleted',1)
     }).catch((error) => {
