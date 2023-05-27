@@ -56,7 +56,7 @@ function Root() {
  
       setAR(frame);
     }, (error) => {
-      console.error("Error getting documents:", error);
+   
     });
  
     // Cleanup function
@@ -77,7 +77,7 @@ function Root() {
     }));
     setDepartment(frame);
   }, (error) => {
-    console.error("Error getting documents:", error);
+   
   });
  
   // Cleanup function
@@ -98,7 +98,7 @@ function Root() {
     }));
     setFaq(frame);
   }, (error) => {
-    console.error("Error getting documents:", error);
+
   });
  
   // Cleanup function
@@ -121,7 +121,7 @@ function Root() {
     
     setClub(frame);
   }, (error) => {
-    console.error("Error getting documents:", error);
+ 
   });
   // Cleanup function
   return () => {
@@ -143,10 +143,10 @@ function Root() {
     }));
     
 const table=frame.map(({id,Key,stutes,createdAt})=>({id,Key,stutes,createdAt}))
-console.log(table)
+
     setStatus(table);
   }, (error) => {
-    console.error("Error getting documents:", error);
+  
   });
 
   // Cleanup function
@@ -165,10 +165,10 @@ console.log(table)
             ...doc.data(),
           }));
           const table=frame.map(({id,Key,stutes,createdAt,role})=>({id,Key,stutes,createdAt,role}))
-          console.log(table)
+      
           setDatabase(table);
         }, (error) => {
-          console.error("Error getting documents:", error);
+     
         });
         
         // Cleanup function
@@ -178,24 +178,32 @@ console.log(table)
     }, []);
 useEffect(()=>{
   const check=database?.filter(({role})=>role==='Delete');
-console.log(check)
-if(check!=null){
 
-  if(check[0]?.Key===auth.currentUser.email){
-  auth.currentUser.delete().then(() => {    
-      auths.notif('success','user deleted',1)
+if(check!=null){
+ 
+const Key=check[0]?.role
+const deleteUser = (key) => {
+  if (key === 'Delete') {
+    auth.currentUser.delete().then(() => {
+      auth.signOut();
+      auths.notif('success', 'user deleted', 1);
+      
     }).catch((error) => {
-    
-      auths.notif('error',error,1)
+      auths.notif('error', error, 1);
     });
-    deleteDoc(doc(db, "User", check[0]?.id));  
+
+    deleteDoc(doc(db, "User", check[0]?.id));
   }
+};
+
+deleteUser(Key);
 }
   
 },[database])
   return (
    
         <div className='flex w-full'>
+          {auths.contextHolder}
         <div className={`${auths.publics===undefined?'w-[15%] h-screen bg-black text-white':'hidden'}`}>
         <SideNav stutesArray={userStates} navs={nav} nav={setNav}/>
             </div>
