@@ -144,7 +144,7 @@ console.log(formData);
                 </div>
                 :
                 <div className='mx-5 my-5'>
-                     <Input styleLable='text-sm mb-[-5px] ' type='text' name='title' lable="Title" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
+        <Input styleLable='text-sm mb-[-5px] ' type='text' name='title' lable="Title" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
         <TextArea styleLable='text-sm mb-[-5px] ' type='text' name='Discription' lable="Discrption" handleChange={handlChange} style=' w-[300px] rounded-md border border-blure-300 '></TextArea>
         <Input styleLable='text-sm mb-[-5px] ' type='file' name='image' lable="Image" handleChange={handleImageChange} style='h-[40px] w-[300px] rounded-md flex flex-col justify-center items-center ' />
         <Button type='submite' style='h-[40px] w-[300px] bg-blue-500 mt-4 hover:bg-grey-200 text-white' onClick={upload} >Add</Button>
