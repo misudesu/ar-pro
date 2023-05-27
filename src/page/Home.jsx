@@ -89,7 +89,7 @@ function Home(props) {
                 {/*  */}
             </div>
         </div>
-        <div className='w-full m-16 w-[70%] rounded-md  h-20 mx-16 '>
+        <div className='  w-full rounded-md   mt-16 ml-16 mr-16 p-8 '>
           <Tables Thead={Thead}  currentItems={props.database}/>
           
             {/* <Link  target='_blank' to={'/Landing/1'}>

@@ -69,12 +69,12 @@ setForm({...form,[e.target.name]:e.target.value});
 <div className='flex flex-col gap-4' >
     <Input styleLable='text-sm mb-[-5px] ' type='email' name='Email' lable="Email" handleChange={handlChange} style='h-[40px] w-[500px] rounded-md border border-blure-500 ' />
     <Input styleLable='text-sm mb-[-5px]' name='Password' placeholder='Password' type='password' style='h-[40px] w-[500px] rounded-md border border-blure-500 '  lable="Password" handleChange={handlChange} />
-<Button type='submite' style='h-[40px] w-[500px] bg-blue-500 mt-4' onClick={login} >Sign in</Button>
+<Button type='submite' style='h-[40px] w-[500px] bg-blue-500 mt-4 text-white' onClick={login} >Sign in</Button>
 <div className='flex justify-center gap-8'>
 
 <p className='text-center mt-5' onClick={ResetPassword} >forget Password</p>
 <Link to='/signup'>
-<p className='text-center mt-5'>Sign Up</p>
+<p className='text-center mt-5 text-white'>Sign Up</p>
 </Link>
 </div>
 </div >
