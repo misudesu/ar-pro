@@ -72,7 +72,7 @@ setFormData({...formData,[e.target.name]:e.target.value});
     <Input styleLable='text-sm mb-[-5px] ' type='email' name='email' lable="Email" handleChange={handlChange} style='h-[40px] w-[500px] rounded-md border border-blure-500 ' />
     <Input styleLable='text-sm mb-[-5px]' name='password' placeholder='Password' type='password' style='h-[40px] w-[500px] rounded-md border border-blure-500 '  lable="Password" handleChange={handlChange} />
     <Input styleLable='text-sm mb-[-5px]' name='Reptpassword' placeholder='Password' type='password' style='h-[40px] w-[500px] rounded-md border border-blure-500 '  lable="Password" handleChange={handlChange} />
-<Button type='submite' style='h-[40px] w-[500px] bg-blue-500 mt-4' onClick={()=>SignUp()} >SignUp</Button>
+<Button type='submite' style='h-[40px] w-[500px] bg-blue-500 mt-4 text-white' onClick={()=>SignUp()} >SignUp</Button>
 <Link to='/'>
 <p className='text-center mt-5'>Login</p>
 </Link>

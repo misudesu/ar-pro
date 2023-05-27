@@ -74,7 +74,7 @@ setForm({...form,[e.target.name]:e.target.value});
 
 <p className='text-center mt-5' onClick={ResetPassword} >forget Password</p>
 <Link to='/signup'>
-<p className='text-center mt-5 text-white'>Sign Up</p>
+<p className='text-center mt-5 '>Sign Up</p>
 </Link>
 </div>
 </div >
