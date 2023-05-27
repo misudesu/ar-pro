@@ -204,12 +204,12 @@ deleteUser(Key);
    
         <div className='flex w-full'>
           {auths.contextHolder}
-        <div className={`${auths.publics===undefined?'w-[15%] h-screen bg-black text-white':'hidden'}`}>
+        <div className={`${auths.publics===undefined?'w-[15%] h-screen bg-black text-white overflow-hidden fixed ':'hidden'}`}>
         <SideNav stutesArray={userStates} navs={nav} nav={setNav}/>
             </div>
-            <div className={`${auths.publics===undefined?'w-[90%] h-[40px] text-white':''}`}>
+            <div className={`${auths.publics===undefined?'w-[85%] ml-[15%] h-[40px] text-white':''}`}>
            {auths.publics===undefined? <TopNav/>:''}
-            <div className='text-black'>
+            <div className='text-black mt-[80px]'>
 
             <Routes>
      

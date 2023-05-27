@@ -27,13 +27,13 @@ function AR() {
     frontVideo:null,
     backVideo:null,
     PDF:null,
+    calculeter:null,
     website:null,
     telegram:null,
     facebook:null,
-    tiwtter:null,
-    email:null
-
-
+    Phone:null,
+    email:null,
+    smis:null,
   })
   const [messageApi, contextHolder] = message.useMessage();
   const notif = (type,message) => {
@@ -135,10 +135,12 @@ setForm({...form,[e.target.name]:e.target.value});
                     backVideo:urlvideo1,
                     PDF:pdf,
                     website:form.website,
+                    calculeter:form.calculeter,
                     telegram:form.telegram,
                     facebook:form.facebook,
-                    tiwtter:form.tiwtter,
+                    Phone:form.Phone,
                     email:form.email,
+                    smis:form.smis,
                      createdAt: Timestamp.now().toDate(),
                 })
                   .then(() => {
@@ -238,7 +240,7 @@ const Delete=(id,FrameImage,video,video1,pdf)=>{
     
       <div className='flex'>
        
-        <div className='flex flex-col gap-4  ml-8 mt-8'>
+        <div className='flex flex-col gap-4  ml-8 mt-8 mb-5'>
         <p>Profile</p>
         <Input styleLable='text-sm mb-[-5px] ' type='text' name='title' lable="Title" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
         <Input styleLable='text-sm mb-[-5px] ' type='text' name='subTitle' lable="Sub Title" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
@@ -246,17 +248,22 @@ const Delete=(id,FrameImage,video,video1,pdf)=>{
         <Input styleLable='text-sm mb-[-5px] ' type='file' name='frontVideo' lable="Front Video" handleChange={handleImageChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
         <Input styleLable='text-sm mb-[-5px] ' type='file' name='backVideo' lable="Back Video" handleChange={handleImageChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
         <Input styleLable='text-sm mb-[-5px] ' type='file' name='PDF' lable="PDF" handleChange={handleImageChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
+        <Button type='submite' style='h-[40px] w-[300px] bg-blue-500 mt-4  hover:bg-grey-200 text-white ' onClick={upload} >Add</Button>
+
         </div>
         {/* social media */}
         <div className='flex flex-col gap-4  ml-8 mt-8'>
         <p>Scoial link</p>
         <Input styleLable='text-sm mb-[-5px] ' type='text' name='website' lable="Website" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
+        <Input styleLable='text-sm mb-[-5px] ' type='text' name='calculeter' lable="calculeter site" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
+        <Input styleLable='text-sm mb-[-5px] ' type='text' name='Smis' lable="Smis site" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
+
         <Input styleLable='text-sm mb-[-5px] ' type='text' name='telegram' lable="Telegram" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
         <Input styleLable='text-sm mb-[-5px] ' type='text' name='facebook' lable="FaceBook" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
-        <Input styleLable='text-sm mb-[-5px] ' type='text' name='tiwtter' lable="Twitter" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
+        <Input styleLable='text-sm mb-[-5px] ' type='text' name='Phone' lable="Phone" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
+        
         <Input styleLable='text-sm mb-[-5px] ' type='email' name='email' lable="Email" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
-        <Button type='submite' style='h-[40px] w-[300px] bg-blue-500 mt-4 hover:bg-grey-200' onClick={upload} >Add</Button>
-
+        
         </div>
         <div className='flex flex-col gap-4  ml-8 mt-8'>
           <img className='w-[300px] h-[150px]' src={ARimg}/>

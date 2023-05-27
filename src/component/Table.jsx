@@ -45,7 +45,7 @@ function Table(props) {
     <td className='p-2'>
         <div className='flex gap-4'>
         <Button type='submite' style='h-[30px] text-red font-bold w-[100px] border border-1 border-red-500  mt-4 hover:bg-grey-200' onClick={()=>props.Delete(data.id,data.image,data.frontVideo,data.backVideo,data.PDF)} >Delete</Button>
-        <Button type='submite' style='h-[30px] text-green-500 font-bold w-[100px] border border-1 border-green-500  mt-4 hover:bg-grey-200'  >Update</Button>
+        {/* <Button type='submite' style='h-[30px] text-green-500 font-bold w-[100px] border border-1 border-green-500  mt-4 hover:bg-grey-200'  >Update</Button> */}
 
         </div>
     </td>

@@ -6,7 +6,7 @@ function TopNav() {
 
   return (
     <div>
-        <div className='h-[50px]  bg-gray-200 '>
+        <div className='h-[50px]  bg-gray-200 fixed w-[85%]'>
 <div onClick={()=>{signOut(auth)}} className='flex justify-end mr-8 items-center h-full'>
     <img className='w-6 h-6' src={logout} alt="" />
 </div>
