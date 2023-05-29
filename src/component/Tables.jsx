@@ -56,12 +56,16 @@ function Actives(Active,docId){
         }
        
     }
+
+
+   
+
   return (
     <table className="w-full dark:bg-black dark:text-white mb-5 ">
         {auths.contextHolder}
     <tr className="border border-solide h-[40px] hover:text-black hover:bg-gray-100 dark:hover:text-black ">
        {props.Thead?.map((data,index)=>(
-        <th key={index} className=''> 
+ <th key={index} className=''> 
    <div className="flex gap-2 p-2 items-center w-full">
     <p className=' text-[14px]'>{data.title}</p>
     <svg  width="8" height="10" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -81,10 +85,9 @@ function Actives(Active,docId){
     <div className="m-1 w-[25px] h-[25px]  bg-[#FFA8A7] rounded-full flex justify-center  items-center">
 <p className="progres plus-700 lh-15 text-[10px] text-white">{data.Key?.charAt(0)}</p>
                             </div>
-
         {data.Key} </td>
-    <td className="">{ Date(data.createdAt?.seconds * 1000 + data.createdAt?.nanoseconds / 1000000)}</td>  
-    <td className="">{ data.role}</td>  
+    
+    <td className="">{data.role}</td>  
     <td className="flex items-center  gap-4 mt-2 text-white">
         {data?.stutes!=true?
         <p className=" rounded-[6px] text-[14px] px-2 py-1 w-20 text-center text-[#CC0905] bg-[#FFEFEB] "  >Un-Active</p>
@@ -93,17 +96,16 @@ function Actives(Active,docId){
 }
 
     </td>
-   
     <td className="relative">
     <div onClick={()=>menu(index+1)} className='flex items-center relative'>
-    <div className='flex justify-center cursor-pointer relative ' >
-      <div className='  rounded-b-full py-1   flex  ' > 
+    <div className='flex justify-center cursor-pointer relative' >
+      <div className='  rounded-b-full py-1   flex' > 
       <button name='team' ><BsThreeDotsVertical className='text-black ' size={20}/></button>
        </div>
       </div> 
       {index+1!=auths.visibleCMenu?
     '':
-    <div className='flex flex-col gap-1  absolute   ml-10  '>
+    <div className='flex flex-col gap-1  absolute ml-10  '>
          {user.displayName==='Admin'?'':
     <>
     {user?.displayName==='Owner'?
