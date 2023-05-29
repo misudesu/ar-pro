@@ -11,7 +11,7 @@ import React ,{ useEffect, useState } from 'react';
 
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-import { collection, deleteDoc, doc, onSnapshot, orderBy, query, where } from 'firebase/firestore'
+import { collection, deleteDoc, doc, onSnapshot, orderBy, query, where,updateDoc } from 'firebase/firestore'
 import { auth, db } from '../Server/Config'
 
 import { useAuth} from '../Fanction/AuthProvider';
@@ -213,13 +213,11 @@ deleteUser(Key);
 
             <Routes>
      
-     <Route path="/Landing/:demo" element={<Landing ar={ar} depar={depar} Club={Club} Faq={Faq}  />} />
-
+ <Route path="/Landing/:demo" element={<Landing ar={ar} depar={depar} Club={Club} Faq={Faq}  />} />
  <Route path='/AR' element={<AR/>} />
  <Route path='/faq' element={<FAQs FAQs='FAQs'  pageTitle="ALL FAQ's"/>} />
  <Route path='/onClub' element={<Clubs Department='Club' pageTitle='ALL Club'/>} />
  <Route path='/department' element={<Department Department='Department' pageTitle='ALL Department' />}/>
-
  <Route path='/' element={<Home ar={ar} database={database} depar={depar} Club={Club} Faq={Faq}  />} />
  <Route path="*" element={<Navigate to='/' />} />
    </Routes>

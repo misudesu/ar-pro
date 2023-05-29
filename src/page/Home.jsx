@@ -14,11 +14,10 @@ function Home(props) {
   const auths=useAuth();
     auths.updateDemo(demo)
    
-   
     const [Thead,setThead]=useState([
         {title:'Email'},
+        {title:'Role'},
         {title:'Stutes'},
-        {title:'CreatedAt'},
      
        ])
    
@@ -89,7 +88,7 @@ function Home(props) {
                 {/*  */}
             </div>
         </div>
-        <div className='  w-full rounded-md   mt-16 ml-16 mr-16 p-8 '>
+        <div className='  w-[70%] rounded-md   mt-16 ml-26 mr-26 p-8 '>
           <Tables Thead={Thead}  currentItems={props.database}/>
           
             {/* <Link  target='_blank' to={'/Landing/1'}>
