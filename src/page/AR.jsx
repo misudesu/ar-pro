@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Input from '../component/Input'
 import ARimg from '../Asset/ARimg.png'
 import Button from '../component/Button'
-import { Timestamp,collection, onSnapshot, orderBy, query,addDoc,doc, where ,deleteDoc } from "firebase/firestore";
+import { Timestamp,collection, onSnapshot, orderBy, query,addDoc,doc, where ,deleteDoc, updateDoc } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL,deleteObject } from "firebase/storage";
 import { storage, db, auth } from "../Server/Config";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -12,6 +12,7 @@ import d2 from '../Asset/d2.png'
 import Table from '../component/Table';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../Fanction/AuthProvider';
+import ArTable from '../component/ArTable';
 function AR() {
   const {demo} =useParams()
  const auths=useAuth();
@@ -26,21 +27,22 @@ function AR() {
 
   const [users] = useAuthState(auth);
   const [chnage,setSwitch]=useState(true);
-  const [DB,setDatabase]=useState(null)
+  const [DB,setDatabase]=useState([])
+
   const [form,setForm]=useState({
-    title:null,
-    subTitle:null,
-    image:null,
-    frontVideo:null,
-    backVideo:null,
-    PDF:null,
-    calculeter:null,
-    website:null,
-    telegram:null,
-    facebook:null,
+    Title:null,
+    SubTitle:null,
+    Image:null,
+    FrontVideo:null,
+    BackVideo:null,
+    Pdf:null,
+    OtherWeb:null,
+    AmuWebsite:null,
+    Telegram:null,
+    Facebook:null,
     Phone:null,
-    email:null,
-    smis:null,
+    Email:null,
+    Smis:null,
   })
   const [messageApi, contextHolder] = message.useMessage();
   const notif = (type,message) => {
@@ -59,24 +61,24 @@ setForm({...form,[e.target.name]:e.target.value});
   function upload(){
     const storageRef = ref(
       storage,
-      `/IMAGE/${Date.now()}${form.image.name}`
+      `/IMAGE/${Date.now()}${form.Image.name}`
     );
     const storageRefv = ref(
       storage,
-      `/VIDEO/${Date.now()}${form.frontVideo.name}`
+      `/VIDEO/${Date.now()}${form.FrontVideo.name}`
     );
     const storageRefv1 = ref(
       storage,
-      `/VIDEO/${Date.now()}${form.backVideo.name}`
+      `/VIDEO/${Date.now()}${form.BackVideo.name}`
     );
     const storageRefp = ref(
       storage,
-      `/PDF/${Date.now()}${form.PDF.name}`
+      `/PDF/${Date.now()}${form.Pdf.name}`
     );
-    const uploadImage = uploadBytesResumable(storageRef,form.image);
-    const uploadVideo = uploadBytesResumable(storageRefv,form.frontVideo);
-    const uploadVideo1 = uploadBytesResumable(storageRefv1,form.backVideo);
-    const uploadPdf = uploadBytesResumable(storageRefp, form.PDF);
+    const uploadImage = uploadBytesResumable(storageRef,form.Image);
+    const uploadVideo = uploadBytesResumable(storageRefv,form.FrontVideo);
+    const uploadVideo1 = uploadBytesResumable(storageRefv1,form.BackVideo);
+    const uploadPdf = uploadBytesResumable(storageRefp, form.Pdf);
     uploadImage.on(
      "state_changed",
      (snapshot) => {
@@ -90,7 +92,7 @@ setForm({...form,[e.target.name]:e.target.value});
      },
      () => {
         getDownloadURL(uploadImage.snapshot.ref).then((url) => {
-            const articleRef = collection(db, "AR");
+            const articleRef = collection(db, "ardb");
             uploadVideo.on(
               "state_changed",
               (snapshot) => {
@@ -133,21 +135,22 @@ setForm({...form,[e.target.name]:e.target.value});
                           () => {
                              getDownloadURL(uploadPdf.snapshot.ref).then((pdf) => {
               //
-              addDoc(articleRef, {
+              const ARinfo = doc(db, "ardb",'ar');
+               updateDoc(ARinfo, {
                     Key:users?.email,
-                    title:form.title,
-                    subTitle:form.subTitle,
-                    image:url,
-                    frontVideo:urlvideo,
-                    backVideo:urlvideo1,
-                    PDF:pdf,
-                    website:form.website,
-                    calculeter:form.calculeter,
-                    telegram:form.telegram,
-                    facebook:form.facebook,
+                    Title:form.Title,
+                    SubTitle:form.SubTitle,
+                    Image:url,
+                    FrontVideo:urlvideo,
+                    BackVideo:urlvideo1,
+                    Pdf:pdf,
+                    AmuWebsite:form.AmuWebsite,
+                    OtherWeb:form.OtherWeb,
+                    Telegram:form.Telegram,
+                    Facebook:form.Facebook,
                     Phone:form.Phone,
-                    email:form.email,
-                    smis:form.smis,
+                    Email:form.Email,
+                    Smis:form.Smis,
                      createdAt: Timestamp.now().toDate(),
                 })
                   .then(() => {
@@ -194,7 +197,7 @@ setForm({...form,[e.target.name]:e.target.value});
   function Switch () {
     setSwitch(!chnage)
     } 
-       const productRef = collection(db, "AR");
+       const productRef = collection(db, "ardb");
     useEffect(() => {
       const q = query(productRef, orderBy("createdAt", "desc"));
 
@@ -203,9 +206,15 @@ setForm({...form,[e.target.name]:e.target.value});
           id: doc.id,
           ...doc.data(),
         }));
-        console.log(frame, users?.email);
-        const tabel=frame.map(({id,title,image,subTitle,frontVideo,backVideo,PDF})=>({id,title,subTitle,image,frontVideo,backVideo,PDF}))
-        setDatabase(tabel);
+       
+        const table=frame.map(({id,Title,Image,SubTitle,FrontVideo,BackVideo,Pdf,OtherWeb,Phone,Smis,Telegram,Facebook,Email,AmuWebsite})=>({id,Title,SubTitle,Image,FrontVideo,BackVideo,Pdf,OtherWeb,Phone,Smis,Telegram,Facebook,Email,AmuWebsite}))
+        setDatabase(table);
+        const dataUrl = "data:image/jpeg;base64," + table[0]?.Image.split(",")[1];
+        console.log(dataUrl) 
+     setForm({...form,Title:table[0]?.Title,Image:dataUrl,SubTitle:table[0]?.SubTitle,
+      FrontVideo:table[0]?.FrontVideo,BackVideo:table[0]?.BackVideo,Pdf:table[0]?.Pdf,
+      OtherWeb:table[0]?.OtherWeb,Phone:table[0]?.Phone,Smis:table[0]?.Smis,Telegram:table[0]?.Telegram,
+      Facebook:table[0]?.Facebook,Email:table[0]?.Email,AmuWebsite:table[0]?.AmuWebsite})
       }, (error) => {
         console.error("Error getting documents:", error);
       });
@@ -218,7 +227,7 @@ setForm({...form,[e.target.name]:e.target.value});
   
 const Delete=(id,FrameImage,video,video1,pdf)=>{
   try {
-    deleteDoc(doc(db, "AR", id));   
+    deleteDoc(doc(db, "ardb", id));   
      const storageRef = ref(storage,FrameImage);
      deleteObject(storageRef);
      const storageRefp = ref(storage,pdf);
@@ -241,7 +250,7 @@ const Delete=(id,FrameImage,video,video1,pdf)=>{
       {chnage!=false?
   <div className='m-5'>
 
- <Table Delete={Delete} table={DB}/>
+ <ArTable Delete={Delete} table={DB}/>
  </div>
     :
     
@@ -249,27 +258,27 @@ const Delete=(id,FrameImage,video,video1,pdf)=>{
        
         <div className='flex flex-col gap-4  ml-8 mt-8 mb-5'>
         <p>Profile</p>
-        <Input styleLable='text-sm mb-[-5px] ' type='text' name='title' lable="Title" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
-        <Input styleLable='text-sm mb-[-5px] ' type='text' name='subTitle' lable="Sub Title" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
-        <Input styleLable='text-sm mb-[-5px] ' type='file' name='image' lable="Image" handleChange={handleImageChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
-        <Input styleLable='text-sm mb-[-5px] ' type='file' name='frontVideo' lable="Front Video" handleChange={handleImageChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
-        <Input styleLable='text-sm mb-[-5px] ' type='file' name='backVideo' lable="Back Video" handleChange={handleImageChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
-        <Input styleLable='text-sm mb-[-5px] ' type='file' name='PDF' lable="PDF" handleChange={handleImageChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
+        <Input styleLable='text-sm mb-[-5px] ' type='text' value={form.Title} name='Title' lable="Title" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
+        <Input styleLable='text-sm mb-[-5px] ' type='text' value={form.SubTitle} name='SubTitle' lable="Sub Title" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
+        <Input styleLable='text-sm mb-[-5px] ' type='file'  name='Image' lable="Image" handleChange={handleImageChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
+        <Input styleLable='text-sm mb-[-5px] ' type='file'  name='FrontVideo' lable="Front Video" handleChange={handleImageChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
+        <Input styleLable='text-sm mb-[-5px] ' type='file'  name='BackVideo' lable="Back Video" handleChange={handleImageChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
+        <Input styleLable='text-sm mb-[-5px] ' type='file'  name='Pdf' lable="PDF" handleChange={handleImageChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
         <Button type='submite' style='h-[40px] w-[300px] bg-blue-500 mt-4  hover:bg-grey-200 text-white ' onClick={upload} >Add</Button>
 
         </div>
         {/* social media */}
         <div className='flex flex-col gap-4  ml-8 mt-8'>
         <p>Scoial link</p>
-        <Input styleLable='text-sm mb-[-5px] ' type='text' name='website' lable="Website" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
-        <Input styleLable='text-sm mb-[-5px] ' type='text' name='calculeter' lable="calculeter site" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
-        <Input styleLable='text-sm mb-[-5px] ' type='text' name='Smis' lable="Smis site" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
+        <Input styleLable='text-sm mb-[-5px] ' type='text' value={form.AmuWebsite} name='AmuWebsite' lable="Website" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
+        <Input styleLable='text-sm mb-[-5px] ' type='text' value={form.OtherWeb} name='OtherWeb' lable="calculeter site" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
+        <Input styleLable='text-sm mb-[-5px] ' type='text' value={form.Smis} name='Smis' lable="Smis site" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
 
-        <Input styleLable='text-sm mb-[-5px] ' type='text' name='telegram' lable="Telegram" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
-        <Input styleLable='text-sm mb-[-5px] ' type='text' name='facebook' lable="FaceBook" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
-        <Input styleLable='text-sm mb-[-5px] ' type='text' name='Phone' lable="Phone" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
+        <Input styleLable='text-sm mb-[-5px] ' type='text' value={form.Telegram} name='Telegram' lable="Telegram" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
+        <Input styleLable='text-sm mb-[-5px] ' type='text' value={form.Facebook} name='Facebook' lable="FaceBook" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
+        <Input styleLable='text-sm mb-[-5px] ' type='text' value={form.Phone} name='Phone' lable="Phone" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
         
-        <Input styleLable='text-sm mb-[-5px] ' type='email' name='email' lable="Email" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
+        <Input styleLable='text-sm mb-[-5px] ' type='email' value={form.Email} name='Email' lable="Email" handleChange={handlChange} style='h-[40px] w-[300px] rounded-md border border-blure-300 ' />
         
         </div>
         <div className='flex flex-col gap-4  ml-8 mt-8'>
