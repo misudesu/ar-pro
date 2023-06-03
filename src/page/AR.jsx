@@ -16,7 +16,14 @@ function AR() {
   const {demo} =useParams()
  const auths=useAuth();
  auths.updateDemo(demo)
- 
+//  const View=(e)=>{
+  
+//   const userinfo = doc(db, "User","FeedBack","GeneralFeedBack", e.target.name);
+//   updateDoc(userinfo, {
+//     States: "Viewed",
+//   });
+// }
+
   const [users] = useAuthState(auth);
   const [chnage,setSwitch]=useState(true);
   const [DB,setDatabase]=useState(null)
