@@ -30,7 +30,7 @@ function Root() {
   const [Faq,setFaq]=useState(null);
     
  
-  const productRefA = collection(db, "AR");
+  const productRefA = collection(db, "ardb");
   const productRefD = collection(db, "Department");
   const productRefC = collection(db, "Club");
   const productRefF = collection(db, "FAQs");
