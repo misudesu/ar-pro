@@ -33,6 +33,7 @@ function AR() {
     Title:null,
     SubTitle:null,
     Image:null,
+    ImageFile:null,
     FrontVideo:null,
     BackVideo:null,
     Pdf:null,
@@ -56,154 +57,192 @@ function AR() {
 setForm({...form,[e.target.name]:e.target.value});
   }
   const handleImageChange = (e) => {
-    var file = document.querySelector('input[type=file]')['files'][0];
-    var reader = new FileReader();
-    var baseString;
-    reader.onloadend = function () {
-        baseString = reader.result;
-        setForm({ ...form, Image: baseString });
+    // var file = document.querySelector('input[type=file]')['files'][0];
+    // var reader = new FileReader();
+    // var baseString;
+    // reader.onloadend = function () {
+    //     baseString = reader.result;
+    //     setForm({ ...form, Image: baseString });
        
-       // setformData({...formData, base64Frame : baseString});
-    };
+    //    // setformData({...formData, base64Frame : baseString});
+    // };
   
-    const frame=  reader.readAsDataURL(file);
-   
+    // const frame=  reader.readAsDataURL(file);
+    setForm({...form, [e.target.name]: e.target.files[0]});
   };
   function upload(){
-    // const storageRef = ref(
-    //   storage,
-    //   `/IMAGE/${Date.now()}${form.Image.name}`
-    // );
-    // const storageRefv = ref(
-    //   storage,
-    //   `/VIDEO/${Date.now()}${form.FrontVideo.name}`
-    // );
-    // const storageRefv1 = ref(
-    //   storage,
-    //   `/VIDEO/${Date.now()}${form.BackVideo.name}`
-    // );
-    // const storageRefp = ref(
-    //   storage,
-    //   `/PDF/${Date.now()}${form.Pdf.name}`
-    // );
-    // const uploadImage = uploadBytesResumable(storageRef,form.Image);
-    // const uploadVideo = uploadBytesResumable(storageRefv,form.FrontVideo);
-    // const uploadVideo1 = uploadBytesResumable(storageRefv1,form.BackVideo);
-    // const uploadPdf = uploadBytesResumable(storageRefp, form.Pdf);
-    // uploadImage.on(
-    //  "state_changed",
-    //  (snapshot) => {
-    //    const progressPercent = Math.round(
-    //      (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-    //    );
-    //    notif('suecces','Please wait request processing image');
-    //  },
-    //  (err) => {
-    //    console.log(err);
-    //  },
-    //  () => {
-    //     getDownloadURL(uploadImage.snapshot.ref).then((url) => {
-            // const articleRef = collection(db, "ardb");
-            // uploadVideo.on(
-            //   "state_changed",
-            //   (snapshot) => {
-            //     const progressPercent = Math.round(
-            //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            //     );
-            //     notif('suecces','Please wait request processing front video');
-            //   },
-            //   (err) => {
-            //     console.log(err);
-            //   },
-            //   () => {
-            //      getDownloadURL(uploadVideo.snapshot.ref).then((urlvideo) => {
-                  //
-                  // uploadVideo1.on(
-                  //   "state_changed",
-                  //   (snapshot) => {
-                  //     const progressPercent = Math.round(
-                  //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                  //     );
-                  //     notif('suecces','Please wait request processing back video');
-                  //   },
-                  //   (err) => {
-                  //     console.log(err);
-                  //   },
-                  //   () => {
-                  //      getDownloadURL(uploadVideo1.snapshot.ref).then((urlvideo1) => {
-                        //
-              //           uploadPdf.on(
-              //             "state_changed",
-              //             (snapshot) => {
-              //               const progressPercent = Math.round(
-              //                 (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-              //               );
-              //               notif('suecces','Please wait request processing pdf file');
-              //             },
-              //             (err) => {
-              //               console.log(err);
-              //             },
-              //             () => {
-              //                getDownloadURL(uploadPdf.snapshot.ref).then((pdf) => {
-              // //
-              const ARinfo = doc(db, "ardb",'ar');
-               updateDoc(ARinfo, {
-                    Key:users?.email,
-                    Title:form.Title,
-                    SubTitle:form.SubTitle,
-                    Image:form.Image,
-                    FrontVideo:form.FrontVideo,
-                    BackVideo:form.BackVideo,
-                    Pdf:form.Pdf,
-                    AmuWebsite:form.AmuWebsite,
-                    OtherWeb:form.OtherWeb,
-                    Telegram:form.Telegram,
-                    Facebook:form.Facebook,
-                    Phone:form.Phone,
-                    Email:form.Email,
-                    Smis:form.Smis,
-                     createdAt: Timestamp.now().toDate(),
-                })
-                  .then(() => {
-                    notif('success','All added successfully');
-                   setForm({...form,title:''})
-                   setForm({...form,email:''})
-                   setForm({...form,telegram:''})
-                   setForm({...form,facebook:''})
-                   setForm({...form,tiwtter:''})
-                   setForm({...form,website:''})
-                   setForm({...form,subtitle:''})
+    console.log(form.Image);
+    console.log(form.ImageFile);
+    if(form.Image!=form.ImageFile){
+      const storageRef = ref(
+        storage,
+        `/IMAGE/${Date.now()}${form.Image.name}`
+      );
+      // const storageRefv = ref(
+      //   storage,
+      //   `/VIDEO/${Date.now()}${form.FrontVideo.name}`
+      // );
+      // const storageRefv1 = ref(
+      //   storage,
+      //   `/VIDEO/${Date.now()}${form.BackVideo.name}`
+      // );
+      // const storageRefp = ref(
+      //   storage,
+      //   `/PDF/${Date.now()}${form.Pdf.name}`
+      // );
+      const uploadImage = uploadBytesResumable(storageRef,form.Image);
+      // const uploadVideo = uploadBytesResumable(storageRefv,form.FrontVideo);
+      // const uploadVideo1 = uploadBytesResumable(storageRefv1,form.BackVideo);
+      // const uploadPdf = uploadBytesResumable(storageRefp, form.Pdf);
+      uploadImage.on(
+       "state_changed",
+       (snapshot) => {
+         const progressPercent = Math.round(
+           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+         );
+         notif('suecces','Please wait request processing image ');
+       },
+       (err) => {
+         console.log(err);
+       },
+       () => {
+          getDownloadURL(uploadImage.snapshot.ref).then((url) => {
+              const articleRef = collection(db, "ardb");
+              // uploadVideo.on(
+              //   "state_changed",
+              //   (snapshot) => {
+              //     const progressPercent = Math.round(
+              //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+              //     );
+              //     notif('suecces','Please wait request processing front video');
+              //   },
+              //   (err) => {
+              //     console.log(err);
+              //   },
+              //   () => {
+              //      getDownloadURL(uploadVideo.snapshot.ref).then((urlvideo) => {
+                    
+                    // uploadVideo1.on(
+                    //   "state_changed",
+                    //   (snapshot) => {
+                    //     const progressPercent = Math.round(
+                    //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                    //     );
+                    //     notif('suecces','Please wait request processing back video');
+                    //   },
+                    //   (err) => {
+                    //     console.log(err);
+                    //   },
+                    //   () => {
+                    //      getDownloadURL(uploadVideo1.snapshot.ref).then((urlvideo1) => {
+                          
+                //           uploadPdf.on(
+                //             "state_changed",
+                //             (snapshot) => {
+                //               const progressPercent = Math.round(
+                //                 (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                //               );
+                //               notif('suecces','Please wait request processing pdf file');
+                //             },
+                //             (err) => {
+                //               console.log(err);
+                //             },
+                //             () => {
+                //                getDownloadURL(uploadPdf.snapshot.ref).then((pdf) => {
+                // //
+                const ARinfo = doc(db, "ardb",'ar');
+                updateDoc(ARinfo, {
+                     Key:users?.email,
+                     Title:form.Title,
+                     SubTitle:form.SubTitle,
+                   Image:url,
+                     FrontVideo:form.FrontVideo,
+                     BackVideo:form.BackVideo,
+                     Pdf:form.Pdf,
+                     AmuWebsite:form.AmuWebsite,
+                     OtherWeb:form.OtherWeb,
+                     Telegram:form.Telegram,
+                     Facebook:form.Facebook,
+                     Phone:form.Phone,
+                     Email:form.Email,
+                     Smis:form.Smis,
+                      createdAt: Timestamp.now().toDate(),
+                 })
+                   .then(() => {
+                     notif('success','All added successfully');
+                    setForm({...form,title:''})
+                    setForm({...form,email:''})
+                    setForm({...form,telegram:''})
+                    setForm({...form,facebook:''})
+                    setForm({...form,tiwtter:''})
+                    setForm({...form,website:''})
+                    setForm({...form,subtitle:''})
+                    setForm({...form,ImageFile:''})
+                   })
+                   .catch((err) => {
+                     alert("Error adding article", { type: "error" });
+                   });
                 
-                  })
-                  .catch((err) => {
-                    alert("Error adding article", { type: "error" });
-                  });
-              
-      //    
-        // }
-        // );
-
-        // }
-        // );
-    //  
+           
+          }
+          );
+  
+          }
+          );
+       
+    // }
+    // );
+  
+    // }
+    // );
+    
   // }
   // );
-
+  
   // }
   // );
-  //
-// }
-// );
+  
+  // }
+  // );
+  
+  // }
+  // );
+     
 
-// }
-// );
-//
-// }
-// );
-
-// }
-// );
-   
+    }else{
+      const ARinfo = doc(db, "ardb",'ar');
+      updateDoc(ARinfo, {
+           Key:users?.email,
+           Title:form.Title,
+           SubTitle:form.SubTitle,
+         
+           FrontVideo:form.FrontVideo,
+           BackVideo:form.BackVideo,
+           Pdf:form.Pdf,
+           AmuWebsite:form.AmuWebsite,
+           OtherWeb:form.OtherWeb,
+           Telegram:form.Telegram,
+           Facebook:form.Facebook,
+           Phone:form.Phone,
+           Email:form.Email,
+           Smis:form.Smis,
+            createdAt: Timestamp.now().toDate(),
+       })
+         .then(() => {
+           notif('success','All added successfully');
+          setForm({...form,title:''})
+          setForm({...form,email:''})
+          setForm({...form,telegram:''})
+          setForm({...form,facebook:''})
+          setForm({...form,tiwtter:''})
+          setForm({...form,website:''})
+          setForm({...form,subtitle:''})
+          setForm({...form,ImageFile:''})
+         })
+         .catch((err) => {
+           alert("Error adding article", { type: "error" });
+         });
+    }
   }
   function Switch () {
     setSwitch(!chnage)
@@ -220,14 +259,14 @@ setForm({...form,[e.target.name]:e.target.value});
        
         const table=frame.map(({id,Title,Image,SubTitle,FrontVideo,BackVideo,Pdf,OtherWeb,Phone,Smis,Telegram,Facebook,Email,AmuWebsite})=>({id,Title,SubTitle,Image,FrontVideo,BackVideo,Pdf,OtherWeb,Phone,Smis,Telegram,Facebook,Email,AmuWebsite}))
         setDatabase(table);
-        const dataUrl = "data:image/jpeg;base64," + table[0]?.Image.split(",")[1];
+       // const dataUrl = "data:image/jpeg;base64," + table[0]?.Image.split(",")[1];
         //console.log(dataUrl) 
-        const input = document.getElementById("filepdf");
+      //  const input = document.getElementById("filepdf");
 //const link = document.getElementById("link");
-const file = new File([table[0]?.Pdf], table[0]?.Pdf.split("/").pop());
+//const file = new File([table[0]?.Pdf], table[0]?.Pdf.split("/").pop());
 
 //console.log(file);
-     setForm({...form,Title:table[0]?.Title,Image:table[0]?.Image,SubTitle:table[0]?.SubTitle,
+     setForm({...form,Title:table[0]?.Title,Image:table[0]?.Image,ImageFile:table[0]?.Image,SubTitle:table[0]?.SubTitle,
       FrontVideo:table[0]?.FrontVideo,BackVideo:table[0]?.BackVideo,Pdf:table[0].Pdf,
       OtherWeb:table[0]?.OtherWeb,Phone:table[0]?.Phone,Smis:table[0]?.Smis,Telegram:table[0]?.Telegram,
       Facebook:table[0]?.Facebook,Email:table[0]?.Email,AmuWebsite:table[0]?.AmuWebsite})
@@ -239,7 +278,7 @@ const file = new File([table[0]?.Pdf], table[0]?.Pdf.split("/").pop());
       return () => {
         unsubscribe();
       };
-  }, []);
+  }, [form.ImageFile]);
   
 const Delete=(id,FrameImage,video,video1,pdf)=>{
   try {
